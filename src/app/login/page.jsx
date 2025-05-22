@@ -3,16 +3,20 @@ import React from "react";
 import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import useUserStore from "@/hooks/useUserStore";
 
 function page() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [errors, setErrors] = useState({});
+  const { setUser } = useUserStore();
+  const router = new useRouter();
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/users", {
+      const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),
@@ -20,6 +24,16 @@ function page() {
 
       const data = await response.json();
       if (response.ok) {
+        console.log(data);
+        setUser({
+          id: data.user.id,
+          nome: data.user.name,
+          email: data.user.email,
+        });
+
+        const { user } = useUserStore.getState();
+
+        console.log(user);
         router.push("/");
       }
       let err = errors;
@@ -35,7 +49,6 @@ function page() {
       <form onSubmit={handleSubmit}>
         <div className="bg-[#4f7ff6] bg-gradient-to-br from-blue-400 to-[#4f7ff6] text-white w-72 grid grid-cols-2 p-4 gap-4 font-bold rounded-2xl shadow-2xl">
           <h1 className="text-3xl mb-5 underline underline-offset-2 ">Login</h1>
-          <span className="text-black font-bold">{errors.login}</span>
           <Link href={"/"}>
             <IoIosArrowBack size={35} className="ml-auto" />
           </Link>
@@ -69,7 +82,7 @@ function page() {
           </a>
           <button
             type="submit"
-            className="col-span-2 bg-blue-800 text-white shadow-2xs shadow-black/80 rounded-2xl w-fit px-12 py-2 text-2xl mx-auto mt-2"
+            className="col-span-2 bg-blue-800 text-white shadow-2xs shadow-black/80 rounded-2xl w-fit px-12 py-2 text-2xl mx-auto mt-2 cursor-pointer hover:bg-blue-700 transition-all duration-300 ease-in-out"
           >
             Entrar
           </button>

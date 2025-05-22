@@ -73,6 +73,7 @@ function page() {
         });
 
         const data = await response.json();
+        console.log(data);
         if (response.ok) {
           router.push("/");
         }
@@ -148,7 +149,7 @@ function page() {
 
           <button
             type="submit"
-            className="col-span-2 bg-blue-800 text-white shadow-2xs shadow-black/80 rounded-2xl w-fit px-12 py-2 text-2xl mx-auto mt-2"
+            className="col-span-2 bg-blue-800 text-white shadow-2xs shadow-black/80 rounded-2xl w-fit px-12 py-2 text-2xl mx-auto mt-2 cursor-pointer hover:bg-blue-700 transition-all duration-300 ease-in-out"
           >
             Cadastrar
           </button>
