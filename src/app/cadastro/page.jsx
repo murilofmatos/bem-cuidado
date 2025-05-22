@@ -38,12 +38,15 @@ function page() {
       })
       .regex(/[0-9]/, { message: "A senha deve ter ao menos um número." }),
 
-    confirmarSenha: z
-      .string()
-      .refine((data) => data.senha === data.confirmarSenha, {
+    confirmarSenha: z.string().refine(
+      () => {
+        return senha == confirmarSenha;
+      },
+      {
         path: ["confimarSenha"],
         message: "As senhas nao coincidem",
-      }),
+      }
+    ),
   });
 
   async function handleSubmit(e) {
@@ -55,14 +58,16 @@ function page() {
       confirmarSenha,
     });
     if (!resultado.success) {
-      const erros = {};
+      const errs = {};
+      console.log(resultado);
       resultado.error.errors.forEach((err) => {
-        erros[err.path[0]] = err.message;
+        errs[err.path[0]] = err.message;
       });
-      setErros(erros);
-      console.log(erros);
+      setErros(errs);
+      console.log(errs);
       return;
     }
+    setErros({});
 
     try {
       if (senha === confirmarSenha) {
@@ -87,7 +92,7 @@ function page() {
   return (
     <div className="h-screen flex justify-center items-center">
       <form onSubmit={handleSubmit}>
-        <div className="bg-[#4f7ff6] bg-gradient-to-br from-blue-400 to-[#4f7ff6] text-white w-72 grid grid-cols-2 p-4 gap-3 font-bold rounded-2xl shadow-2xl">
+        <div className="bg-[#4f7ff6] bg-gradient-to-br from-blue-400 to-[#4f7ff6] text-white w-72 grid grid-cols-2 p-4 gap-4 font-bold rounded-2xl shadow-2xl">
           <h1 className="text-3xl mb-5 underline underline-offset-2 ">
             Cadastro
           </h1>
@@ -105,7 +110,11 @@ function page() {
             id="nome"
             className="col-span-2 bg-blue-50 text-xl p-2 w-full rounded-2xl shadow-inner shadow-black/40 focus:outline-none focus:ring-blue-500 focus:ring-2 text-black font-medium"
           />
-          <span className="col-span-2 text-black font-bold">{erros.name}</span>
+          {erros && (
+            <span className="col-span-2 text-black font-bold">
+              {erros.name}
+            </span>
+          )}
           <label htmlFor="email" className="col-span-2 text-xl">
             Email:
           </label>
@@ -117,8 +126,11 @@ function page() {
             id="email"
             className="col-span-2 bg-blue-50 text-xl p-2 w-full rounded-2xl shadow-inner shadow-black/40 focus:outline-none focus:ring-blue-500 focus:ring-2 text-black font-medium"
           />
-          <span className="col-span-2 text-black font-bold">{erros.email}</span>
-
+          {erros && (
+            <span className="col-span-2 text-black font-bold">
+              {erros.email}
+            </span>
+          )}
           <label htmlFor="senha" className="col-span-2 text-xl">
             Senha:
           </label>
@@ -130,8 +142,11 @@ function page() {
             id="senha"
             className="col-span-2 bg-blue-50 text-xl p-2 w-full rounded-2xl shadow-inner shadow-black/40 focus:outline-none focus:ring-blue-500 focus:ring-2 text-black font-medium"
           />
-          <span className="col-span-2 text-black font-bold">{erros.senha}</span>
-
+          {erros && (
+            <span className="col-span-2 text-black font-bold">
+              {erros.senha}
+            </span>
+          )}
           <label htmlFor="confirmar senha" className="col-span-2 text-xl">
             Confirmar senha:
           </label>
@@ -143,10 +158,11 @@ function page() {
             id="confirmar senha"
             className="col-span-2 bg-blue-50 text-xl p-2 w-full rounded-2xl shadow-inner shadow-black/40 focus:outline-none focus:ring-blue-500 focus:ring-2 text-black font-medium"
           />
-          <span className="col-span-2 text-black font-bold">
-            {erros.confirmarSenha}
-          </span>
-
+          {erros && (
+            <span className="col-span-2 text-black font-bold">
+              {erros.confirmarSenha}
+            </span>
+          )}
           <button
             type="submit"
             className="col-span-2 bg-blue-800 text-white shadow-2xs shadow-black/80 rounded-2xl w-fit px-12 py-2 text-2xl mx-auto mt-2 cursor-pointer hover:bg-blue-700 transition-all duration-300 ease-in-out"
