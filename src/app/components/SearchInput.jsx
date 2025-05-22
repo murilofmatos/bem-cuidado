@@ -7,7 +7,7 @@ function SearchInput() {
         <IoSearch color="#3F7FF6" size={30} />
       </button>
       <input
-        className="bg-[#C9D6EF] rounded-full py-2 pl-10 pr-6 text-[#3F7FF6] w-full"
+        className="bg-[#C9D6EF] rounded-full py-2 pl-10 pr-6 text-[#3F7FF6] shadow-inner shadow-black/50 w-full"
         type="text"
         placeholder="Busque um serviço..."
       />
