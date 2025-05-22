@@ -4,6 +4,8 @@ import { useState, use, useEffect } from "react";
 import Header from "@/app/components/Header";
 import { FaStar } from "react-icons/fa6";
 import Image from "next/image";
+import { FaStarHalf } from "react-icons/fa6";
+import ComentaryCard from "@/app/components/ComentaryCard";
 
 function page({ params }) {
   const [worker, setWorker] = useState({});
@@ -57,15 +59,12 @@ function page({ params }) {
           </button>
         </div>
 
-        {/* <div>
+        <div>
           <h2 className="text-2xl font-bold text-[#3F7FF6] my-4">Avaliações</h2>
-          <div className="">
-            <h3>Murilo Francisco Matos</h3>
-            <p className="font-bold">
-              Serviço muito bom, foi pontual e cuidadoso. Recomendo!
-            </p>
-          </div>
-        </div> */}
+          <ComentaryCard />
+          <ComentaryCard />
+          <ComentaryCard />
+        </div>
       </main>
     </div>
   );
