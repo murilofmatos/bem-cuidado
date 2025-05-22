@@ -22,6 +22,7 @@ function PopularServicesSection() {
       <div className="flex flex-col gap-4">
         {workers.map((worker) => (
           <WorkerCard
+            id={worker.id}
             key={worker.id}
             name={worker.name}
             service={worker.service}
