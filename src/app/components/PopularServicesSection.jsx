@@ -7,7 +7,9 @@ function PopularServicesSection() {
   const [workers, setWorkers] = useState([]);
   useEffect(() => {
     async function fetchWorkers() {
-      const response = await fetch("http://localhost:3000/workers/popular");
+      const response = await fetch(
+        "https://bem-cuidado-api.onrender.com/workers/popular"
+      );
       const data = await response.json();
       console.log(response);
       setWorkers(data);

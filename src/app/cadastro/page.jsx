@@ -71,11 +71,14 @@ function page() {
 
     try {
       if (senha === confirmarSenha) {
-        const response = await fetch("http://localhost:3000/users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, senha }),
-        });
+        const response = await fetch(
+          "https://bem-cuidado-api.onrender.com/users",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, senha }),
+          }
+        );
 
         const data = await response.json();
         console.log(data);
