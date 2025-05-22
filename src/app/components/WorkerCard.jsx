@@ -4,23 +4,29 @@ import { FaStar } from "react-icons/fa6";
 
 function WorkerCard({ src, name, service, rating }) {
   return (
-    <div className="flex justify-between items-center">
-      <div className="flex gap-2 items-center">
+    <div className="grid grid-cols-6 gap-5">
+      <div className="grid grid-cols-6 items-center col-span-4 gap-2">
         <Image
           src={src}
           width={100}
           height={100}
           alt="Foto do prestador de serviço"
-          className="rounded-xl"
+          className="rounded-xl col-span-2"
         />
-        <div className="flex flex-col gap-3">
-          <p className="font-bold text-2xl text-[#145ADD]">{name}</p>
-          <p className="text-lg text-[#3F7FF6]">{service}</p>
+        <div className="flex flex-col col-span-4">
+          <p className="font-bold text-2xl text-[#145ADD] overflow-ellipsis line-clamp-1">
+            {name}
+          </p>
+          <p className="text-lg text-[#3F7FF6] overflow-ellipsis line-clamp-1">
+            {service}
+          </p>
         </div>
       </div>
-      <div className="bg-gray-200 px-3 py-1 rounded-full flex gap-3">
-        <FaStar size={30} className="text-yellow-500" />
-        <p className="font-bold text-black">{rating}</p>
+      <div className="col-span-2 flex justify-center items-center">
+        <div className="bg-gray-200 px-3 py-1 rounded-full flex gap-3">
+          <FaStar size={30} className="text-yellow-500" />
+          <p className="font-bold text-black">{rating}</p>
+        </div>
       </div>
     </div>
   );
