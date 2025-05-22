@@ -2,7 +2,7 @@ import { IoSearch } from "react-icons/io5";
 
 function SearchInput() {
   return (
-    <div className="relative w-full flex items-center">
+    <div className="relative w-full flex items-center mb-4">
       <button className="w-8 absolute ml-1">
         <IoSearch color="#3F7FF6" size={30} />
       </button>
