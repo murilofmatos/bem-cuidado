@@ -39,7 +39,6 @@ function page() {
         message: "A senha deve ter ao menos uma letra minúscula.",
       })
       .regex(/[0-9]/, { message: "A senha deve ter ao menos um número." }),
-
     confirmarSenha: z.string().refine(
       () => {
         return senha == confirmarSenha;

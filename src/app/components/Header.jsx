@@ -20,7 +20,9 @@ function header() {
       <button>
         <HiOutlineMenuAlt2 color="white" size={40} />
       </button>
-      <h1 className="text-white font-semibold text-2xl">BemCuidado</h1>
+      <Link href={"/"}>
+        <h1 className="text-white font-semibold text-2xl">BemCuidado</h1>
+      </Link>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <CgProfile color="white" size={40} className="cursor-pointer" />
