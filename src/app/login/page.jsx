@@ -10,7 +10,7 @@ function page() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [errors, setErrors] = useState({});
-  const { setUser } = useUserStore();
+  const { setUser } = useUserStore(); // estado global zustand
   const router = new useRouter();
   async function handleSubmit(e) {
     e.preventDefault();
@@ -27,16 +27,13 @@ function page() {
 
       const data = await response.json();
       if (response.ok) {
-        console.log(data);
+
         setUser({
           id: data.user.id,
           nome: data.user.name,
           email: data.user.email,
         });
 
-        const { user } = useUserStore.getState();
-
-        console.log(user);
         router.push("/");
       }
       let err = errors;

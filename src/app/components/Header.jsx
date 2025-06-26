@@ -14,6 +14,7 @@ import useUserStore from "@/hooks/useUserStore";
 function header() {
   const { user } = useUserStore();
   const { clearUser } = useUserStore();
+
   return (
     <header className="bg-gradient-to-br from-[#3f7ff6] to-blue-700 flex justify-between items-center p-4 pt-8 shadow-lg">
       <button>
@@ -28,7 +29,7 @@ function header() {
         {user.authenticated && (
           <DropdownMenuContent>
             <DropdownMenuItem className="cursor-pointer" asChild>
-              <Link href={"/perfil"}>Perfil</Link>
+              <Link href={"/"}>Olá {user.nome}</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem

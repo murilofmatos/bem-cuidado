@@ -12,6 +12,7 @@ function page() {
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erros, setErros] = useState({});
+  const { setUser } = useUserStore(); // estado global zustand
   const router = new useRouter();
   const cadastroSchema = z.object({
     name: z
@@ -59,12 +60,12 @@ function page() {
     });
     if (!resultado.success) {
       const errs = {};
-      console.log(resultado);
+
       resultado.error.errors.forEach((err) => {
         errs[err.path[0]] = err.message;
       });
-      setErros(errs);
-      console.log(errs);
+      setErros(errs); // guardando os erros
+
       return;
     }
     setErros({});
@@ -81,8 +82,14 @@ function page() {
         );
 
         const data = await response.json();
-        console.log(data);
+        
         if (response.ok) {
+          setUser({
+            id: data.user.id,
+            nome: data.user.name,
+            email: data.user.email,
+          });
+  
           router.push("/");
         }
       }
