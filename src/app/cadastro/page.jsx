@@ -5,6 +5,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
+import useUserStore from "@/hooks/useUserStore";
 
 function page() {
   const [name, setName] = useState("");
